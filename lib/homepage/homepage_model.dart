@@ -4,17 +4,19 @@ import '/components/request_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'homepage_widget.dart' show HomepageWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class HomepageModel extends FlutterFlowModel {
+class HomepageModel extends FlutterFlowModel<HomepageWidget> {
   ///  Local state fields for this page.
 
   List<String> nos = [];
   void addToNos(String item) => nos.add(item);
   void removeFromNos(String item) => nos.remove(item);
   void removeAtIndexFromNos(int index) => nos.removeAt(index);
+  void insertAtIndexInNos(int index, String item) => nos.insert(index, item);
   void updateNosAtIndex(int index, Function(String) updateFn) =>
       nos[index] = updateFn(nos[index]);
 

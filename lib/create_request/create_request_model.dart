@@ -8,13 +8,14 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/place.dart';
 import 'dart:io';
+import 'create_request_widget.dart' show CreateRequestWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class CreateRequestModel extends FlutterFlowModel {
+class CreateRequestModel extends FlutterFlowModel<CreateRequestWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

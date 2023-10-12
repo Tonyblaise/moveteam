@@ -46,8 +46,10 @@ class _HomepageWidgetState extends State<HomepageWidget>
   Widget build(BuildContext context) {
     return StreamBuilder<List<RequestsRecord>>(
       stream: queryRequestsRecord(
-        queryBuilder: (requestsRecord) =>
-            requestsRecord.where('user', isEqualTo: currentUserReference),
+        queryBuilder: (requestsRecord) => requestsRecord.where(
+          'user',
+          isEqualTo: currentUserReference,
+        ),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -69,7 +71,9 @@ class _HomepageWidgetState extends State<HomepageWidget>
         }
         List<RequestsRecord> homepageRequestsRecordList = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -92,10 +96,40 @@ class _HomepageWidgetState extends State<HomepageWidget>
               iconTheme:
                   IconThemeData(color: FlutterFlowTheme.of(context).primary),
               automaticallyImplyLeading: false,
-              leading: Icon(
-                Icons.menu,
-                color: FlutterFlowTheme.of(context).secondaryText,
-                size: 24.0,
+              leading: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  var confirmDialogResponse = await showDialog<bool>(
+                        context: context,
+                        builder: (alertDialogContext) {
+                          return AlertDialog(
+                            title: Text('tsrtertw'),
+                            content: Text('wertwer'),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext, false),
+                                child: Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(alertDialogContext, true),
+                                child: Text('Confirm'),
+                              ),
+                            ],
+                          );
+                        },
+                      ) ??
+                      false;
+                },
+                child: Icon(
+                  Icons.menu,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 24.0,
+                ),
               ),
               title: Text(
                 'Page Title',

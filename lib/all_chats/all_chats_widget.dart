@@ -63,7 +63,10 @@ class _AllChatsWidgetState extends State<AllChatsWidget> {
           child: StreamBuilder<List<ChatsRecord>>(
             stream: queryChatsRecord(
               queryBuilder: (chatsRecord) => chatsRecord
-                  .where('users', arrayContains: currentUserReference)
+                  .where(
+                    'users',
+                    arrayContains: currentUserReference,
+                  )
                   .orderBy('last_message_time', descending: true),
             ),
             builder: (context, snapshot) {

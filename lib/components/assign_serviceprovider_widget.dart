@@ -96,8 +96,10 @@ class _AssignServiceproviderWidgetState
               ),
               StreamBuilder<List<UsersRecord>>(
                 stream: queryUsersRecord(
-                  queryBuilder: (usersRecord) =>
-                      usersRecord.where('role', isEqualTo: 'service_provider'),
+                  queryBuilder: (usersRecord) => usersRecord.where(
+                    'role',
+                    isEqualTo: 'service_provider',
+                  ),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
@@ -250,8 +252,12 @@ class _AssignServiceproviderWidgetState
                           FFButtonWidget(
                             onPressed: () async {
                               await widget.request!.reference.update({
-                                'invited_service_providers':
-                                    _model.invitedServiceProviders,
+                                ...mapToFirestore(
+                                  {
+                                    'invited_service_providers':
+                                        _model.invitedServiceProviders,
+                                  },
+                                ),
                               });
                             },
                             text: 'Assign',

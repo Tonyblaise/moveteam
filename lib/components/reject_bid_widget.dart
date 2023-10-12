@@ -85,8 +85,10 @@ class _RejectBidWidgetState extends State<RejectBidWidget> {
               ),
               StreamBuilder<List<UsersRecord>>(
                 stream: queryUsersRecord(
-                  queryBuilder: (usersRecord) =>
-                      usersRecord.where('role', isEqualTo: 'service_provider'),
+                  queryBuilder: (usersRecord) => usersRecord.where(
+                    'role',
+                    isEqualTo: 'service_provider',
+                  ),
                 ),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.

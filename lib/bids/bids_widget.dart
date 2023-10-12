@@ -49,8 +49,10 @@ class _BidsWidgetState extends State<BidsWidget> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return StreamBuilder<List<BidsRecord>>(
       stream: queryBidsRecord(
-        queryBuilder: (bidsRecord) =>
-            bidsRecord.where('request', isEqualTo: widget.request?.reference),
+        queryBuilder: (bidsRecord) => bidsRecord.where(
+          'request',
+          isEqualTo: widget.request?.reference,
+        ),
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -72,7 +74,9 @@ class _BidsWidgetState extends State<BidsWidget> with TickerProviderStateMixin {
         }
         List<BidsRecord> bidsBidsRecordList = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

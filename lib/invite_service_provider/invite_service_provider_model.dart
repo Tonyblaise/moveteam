@@ -1,11 +1,13 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'invite_service_provider_widget.dart' show InviteServiceProviderWidget;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class InviteServiceProviderModel extends FlutterFlowModel {
+class InviteServiceProviderModel
+    extends FlutterFlowModel<InviteServiceProviderWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

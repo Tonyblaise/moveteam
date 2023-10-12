@@ -49,7 +49,9 @@ class _CreateBidWidgetState extends State<CreateBidWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -291,13 +293,21 @@ class _CreateBidWidgetState extends State<CreateBidWidget> {
                           ...createChatsRecordData(
                             request: widget.request,
                           ),
-                          'users': [currentUserReference],
+                          ...mapToFirestore(
+                            {
+                              'users': [currentUserReference],
+                            },
+                          ),
                         });
                         _model.chat = ChatsRecord.getDocumentFromData({
                           ...createChatsRecordData(
                             request: widget.request,
                           ),
-                          'users': [currentUserReference],
+                          ...mapToFirestore(
+                            {
+                              'users': [currentUserReference],
+                            },
+                          ),
                         }, chatsRecordReference);
 
                         await _model.bids!.reference

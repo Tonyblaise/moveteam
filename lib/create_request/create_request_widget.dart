@@ -49,7 +49,9 @@ class _CreateRequestWidgetState extends State<CreateRequestWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -203,7 +205,8 @@ class _CreateRequestWidgetState extends State<CreateRequestWidget> {
                           'SUV-large',
                           'Trucks',
                           'Box trucks',
-                          'Cargo'
+                          'Cargo',
+                          'EV'
                         ],
                         onChanged: (val) => setState(
                             () => _model.dropDownVehicleTypeValue = val),
@@ -604,13 +607,21 @@ class _CreateRequestWidgetState extends State<CreateRequestWidget> {
                               ...createChatsRecordData(
                                 request: _model.requests?.reference,
                               ),
-                              'users': [currentUserReference],
+                              ...mapToFirestore(
+                                {
+                                  'users': [currentUserReference],
+                                },
+                              ),
                             });
                             _model.chat = ChatsRecord.getDocumentFromData({
                               ...createChatsRecordData(
                                 request: _model.requests?.reference,
                               ),
-                              'users': [currentUserReference],
+                              ...mapToFirestore(
+                                {
+                                  'users': [currentUserReference],
+                                },
+                              ),
                             }, chatsRecordReference);
                             if (_model.chat?.reference != null) {
                               await _model.requests!.reference

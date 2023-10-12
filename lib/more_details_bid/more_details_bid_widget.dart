@@ -63,7 +63,9 @@ class _MoreDetailsBidWidgetState extends State<MoreDetailsBidWidget> {
         }
         final moreDetailsBidRequestsRecord = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -86,7 +88,7 @@ class _MoreDetailsBidWidgetState extends State<MoreDetailsBidWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 20.0, 0.0, 0.0),
                           child: Text(
-                            'Bid for request',
+                            'Available Move(s)',
                             style: FlutterFlowTheme.of(context).headlineMedium,
                           ),
                         ),
@@ -143,35 +145,6 @@ class _MoreDetailsBidWidgetState extends State<MoreDetailsBidWidget> {
                               ),
                               Text(
                                 moreDetailsBidRequestsRecord.companyName,
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 6.0),
-                                child: Text(
-                                  'Company Email',
-                                  style: FlutterFlowTheme.of(context).bodyLarge,
-                                ),
-                              ),
-                              Text(
-                                moreDetailsBidRequestsRecord.companyEmail,
                                 style: FlutterFlowTheme.of(context).bodyMedium,
                               ),
                             ],
@@ -322,7 +295,7 @@ class _MoreDetailsBidWidgetState extends State<MoreDetailsBidWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 6.0),
                                 child: Text(
-                                  'Select Pickup Location',
+                                  'Pickup Location',
                                   style: FlutterFlowTheme.of(context).bodyLarge,
                                 ),
                               ),
@@ -352,7 +325,7 @@ class _MoreDetailsBidWidgetState extends State<MoreDetailsBidWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 6.0),
                                 child: Text(
-                                  'Select Drop Off Location',
+                                  'Drop Off Location',
                                   style: FlutterFlowTheme.of(context).bodyLarge,
                                 ),
                               ),

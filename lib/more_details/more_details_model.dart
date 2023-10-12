@@ -2,18 +2,20 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'more_details_widget.dart' show MoreDetailsWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class MoreDetailsModel extends FlutterFlowModel {
+class MoreDetailsModel extends FlutterFlowModel<MoreDetailsWidget> {
   ///  Local state fields for this page.
 
   List<String> nos = [];
   void addToNos(String item) => nos.add(item);
   void removeFromNos(String item) => nos.remove(item);
   void removeAtIndexFromNos(int index) => nos.removeAt(index);
+  void insertAtIndexInNos(int index, String item) => nos.insert(index, item);
   void updateNosAtIndex(int index, Function(String) updateFn) =>
       nos[index] = updateFn(nos[index]);
 
